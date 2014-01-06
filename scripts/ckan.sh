@@ -17,6 +17,9 @@ echo 'Drupal already configured!. Delete this to reconfigure Drupal stack.' > /v
 apt-get update
 apt-get install -y python-dev postgresql libpq-dev python-pip python-virtualenv git-core solr-jetty openjdk-6-jdk
 
+# Fix jetty 6.1 bug
+sed -ri 's/:space:/[:space:]/g' /etc/init.d/jetty
+
 # Install CKAN into a Python virtual environment:
 mkdir -p /vagrant/ckan/lib
 sudo ln -s /vagrant/ckan/lib /usr/lib/ckan
@@ -53,7 +56,7 @@ paster make-config ckan /etc/ckan/default/development.ini
 sed -i 's/ckan_default:pass/'$ckan_user_name':'$ckan_user_pass'/g' /etc/ckan/default/development.ini
 
 # Setup Solr (Single Solr instance):
-sed -i 's/NO_START=1/NO_START=0/g' /etc/default/jetty
+sed -i 's|NO_START=1|NO_START=0|g' /etc/default/jetty
 sed -i 's|#JETTY_HOST=$(uname -n)|JETTY_HOST=127.0.0.1|g' /etc/default/jetty
 sed -i 's|#JETTY_PORT=8080|JETTY_PORT=8983|g' /etc/default/jetty
 sed -i 's|#JAVA_HOME=|JAVA_HOME=/usr/lib/jvm/java-6-openjdk-i386/|g' /etc/default/jetty
