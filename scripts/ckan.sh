@@ -3,15 +3,18 @@
 # --- Change this  default values ---: #
 postgres_user_pass=postgres
 ckan_user_name=ckan_default
-ckan_user_pass=default_pass
+ckan_user_pass=root
 ckan_db_name=ckan_default
+ds_user_name=datastore_default
+ds_user_pass=root
+ds_db_name=datastore_default
 # ------------------------------------ #
 
 # Run-once script
 if [ -f "/vagrant/prov/ckan_provision" ]; then
 exit 0
 fi
-echo 'Drupal already configured!. Delete this to reconfigure Drupal stack.' > /vagrant/prov/ckan_provision
+echo 'Ckan already configured!. Delete this to reconfigure Drupal stack.' > /vagrant/prov/ckan_provision
 
 # Install required packages:
 apt-get update
@@ -69,8 +72,23 @@ sudo service jetty restart
 cd /usr/lib/ckan/default/src/ckan
 paster db init -c /etc/ckan/default/development.ini
 
-# 7. Set up the DataStore
-# TODO
+# 7. Set up the DataStore TODO
+sed -ri 's/ckan.plugins =/ckan.plugins = datastore/g' /etc/ckan/default/development.ini
+
+# Create datastore user:
+sudo -u postgres createuser -S -D -R $ds_user_name
+sudo -u postgres psql -c"ALTER user $ds_user_name WITH PASSWORD '$ds_user_pass'"
+
+# Creates ckan db:
+sudo -u postgres createdb -O $ckan_user_name $ds_db_name --lc-ctype en_US.utf8  --lc-collate en_US.utf8 -E utf-8 -T template0
+
+# Edit CKAN config file
+sed -ri 's|#ckan.datastore.write_url = postgresql://ckan_default:pass@localhost/datastore_default|ckan.datastore.write_url = postgresql://'$ckan_user_name':'$ckan_user_pass'@localhost/'$ds_db_name'|g' /etc/ckan/default/development.ini
+
+sed -ri 's|#ckan.datastore.read_url = postgresql://datastore_default:pass@localhost/datastore_default|ckan.datastore.read_url = postgresql://'$ds_user_name':'$ds_user_pass'@localhost/'$ds_db_name'|g' /etc/ckan/default/development.ini
+
+#Set permissions
+paster datastore set-permissions postgres -c /etc/ckan/default/development.ini
 
 # Link to who.ini:
 ln -s /usr/lib/ckan/default/src/ckan/who.ini /etc/ckan/default/who.ini
