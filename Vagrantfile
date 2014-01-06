@@ -11,8 +11,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   # Every Vagrant virtual environment requires a box to build off of.
   config.vm.box = "precise32"
-  config.vm.provision :shell, :path => "scripts/ckan.sh"
-  config.vm.provision :shell, :path => "scripts/drupal.sh"
+  #config.vm.provision :shell, :path => "scripts/ckan.sh"
+  #config.vm.provision :shell, :path => "scripts/drupal.sh"
+  config.vm.provision :shell, :path => "scripts/virtuoso.sh"
 
   # The url from where the 'config.vm.box' box will be fetched if it
   # doesn't already exist on the user's system.
@@ -27,6 +28,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   # Jetty
   config.vm.network :forwarded_port, guest: 8983, host: 1200, auto_correct: true
+  
+  # Virtuoso
+  config.vm.network :forwarded_port, guest: 8890, host: 1300, auto_correct: true
 
   # Create a private network, which allows host-only access to the machine
   # using a specific IP.
