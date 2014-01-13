@@ -1,5 +1,6 @@
-# Exclude .vagrant folder
+# Exclude folders
 .vagrant/
+ckan/
 
 # Exclude backup files
 *~

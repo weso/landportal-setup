@@ -11,10 +11,10 @@ ds_db_name=datastore_default
 # ------------------------------------ #
 
 # Run-once script
-if [ -f "/vagrant/prov/ckan_provision" ]; then
+if [ -f "/vagrant/delete_to_reconf/ckan_configured" ]; then
 exit 0
 fi
-echo 'Ckan already configured!. Delete this to reconfigure Drupal stack.' > /vagrant/prov/ckan_provision
+echo 'Ckan already configured!. Delete this to reconfigure CKAN stack.' > /vagrant/delete_to_reconf/ckan_configured
 
 # Install required packages:
 apt-get update
@@ -30,7 +30,7 @@ mkdir -p /vagrant/ckan/etc
 sudo ln -s /vagrant/ckan/etc /etc/ckan
 sudo mkdir -p /usr/lib/ckan/default
 sudo chown `whoami` /usr/lib/ckan/default
-virtualenv --no-site-packages /usr/lib/ckan/default
+virtualenv /usr/lib/ckan/default
 . /usr/lib/ckan/default/bin/activate
 pip install -e 'git+https://github.com/okfn/ckan.git@ckan-2.0#egg=ckan'
 pip install -r /usr/lib/ckan/default/src/ckan/pip-requirements.txt
