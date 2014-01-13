@@ -2,5 +2,6 @@
 .vagrant/
 ckan/
 
-# Exclude backup files
+# Exclude files
 *~
+ckan_configured

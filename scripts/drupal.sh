@@ -13,10 +13,10 @@ drupal_account_pass=admin
 # ------------------------------------ #
 
 # Run-once script
-if [ -f "/vagrant/delete_to_reconf/drupal_provision" ]; then
+if [ -f "/vagrant/drupal_configured" ]; then
 exit 0
 fi
-echo 'Drupal already configured!. Delete this to reconfigure Drupal stack.' > /vagrant/delete_to_reconf/drupal_provision
+echo 'Drupal already configured!. Delete this to reconfigure Drupal stack.' > /vagrant/drupal_configured
 
 # Update system
 apt-get update
