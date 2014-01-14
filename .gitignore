@@ -1,7 +1,5 @@
 # Exclude folders
 .vagrant/
-ckan/
 
 # Exclude files
 *~
-ckan_configured
