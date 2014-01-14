@@ -8,7 +8,7 @@ New version of the International Land Coalition (ILC) Land Portal
 2. Install **Vagrant** <br/> http://www.vagrantup.com/downloads.html
 3. Change the default values in: <br/>
 
-**_/scripts/ckan.sh_** <br/>
+**_/scripts/base.sh_** <br/>
 
 ```bash
 mysql_root_pass=root
