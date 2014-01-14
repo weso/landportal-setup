@@ -1,4 +1,4 @@
-        #!/usr/bin/env bash
+#!/usr/bin/env bash
 
 # --- Change this  default values ---: #
 postgres_user_pass=postgres
@@ -15,14 +15,6 @@ if [ -f "/vagrant/ckan_configured" ]; then
 exit 0
 fi
 echo 'Ckan already configured!. Delete this to reconfigure CKAN stack.' > /vagrant/ckan_configured
-
-# Install required packages:
-apt-get update
-apt-get install -y python-dev postgresql libpq-dev python-pip python-virtualenv git-core solr-jetty openjdk-6-jdk apache2 libapache2-mod-wsgi
-
-# Move Apache to /vagrant directory
-sudo rm -rf /var/www
-sudo ln -fs /vagrant /var/www
 
 # Fix jetty 6.1 bug
 sed -ri 's/:space:/[:space:]/g' /etc/init.d/jetty

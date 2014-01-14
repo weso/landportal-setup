@@ -1,5 +1,10 @@
 # Exclude folders
 .vagrant/
+ckan/
+landportal/
 
 # Exclude files
 *~
+phpmyadmin
+ckan_configured
+drupal_configured
