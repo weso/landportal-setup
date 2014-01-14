@@ -1,21 +1,28 @@
-#!/usr/bin/env bash
+        #!/usr/bin/env bash
 
 # --- Change this  default values ---: #
 postgres_user_pass=postgres
 ckan_user_name=ckan_default
-ckan_user_pass=default_pass
+ckan_user_pass=root
 ckan_db_name=ckan_default
+ds_user_name=datastore_default
+ds_user_pass=root
+ds_db_name=datastore_default
 # ------------------------------------ #
 
 # Run-once script
-if [ -f "/vagrant/prov/ckan_provision" ]; then
+if [ -f "/vagrant/ckan_configured" ]; then
 exit 0
 fi
-echo 'Drupal already configured!. Delete this to reconfigure Drupal stack.' > /vagrant/prov/ckan_provision
+echo 'Ckan already configured!. Delete this to reconfigure CKAN stack.' > /vagrant/ckan_configured
 
 # Install required packages:
 apt-get update
-apt-get install -y python-dev postgresql libpq-dev python-pip python-virtualenv git-core solr-jetty openjdk-6-jdk
+apt-get install -y python-dev postgresql libpq-dev python-pip python-virtualenv git-core solr-jetty openjdk-6-jdk apache2 libapache2-mod-wsgi
+
+# Move Apache to /vagrant directory
+sudo rm -rf /var/www
+sudo ln -fs /vagrant /var/www
 
 # Fix jetty 6.1 bug
 sed -ri 's/:space:/[:space:]/g' /etc/init.d/jetty
@@ -27,10 +34,10 @@ mkdir -p /vagrant/ckan/etc
 sudo ln -s /vagrant/ckan/etc /etc/ckan
 sudo mkdir -p /usr/lib/ckan/default
 sudo chown `whoami` /usr/lib/ckan/default
-virtualenv --no-site-packages /usr/lib/ckan/default
+virtualenv /usr/lib/ckan/default
 . /usr/lib/ckan/default/bin/activate
-pip install -e 'git+https://github.com/okfn/ckan.git@ckan-2.0#egg=ckan'
-pip install -r /usr/lib/ckan/default/src/ckan/pip-requirements.txt
+pip install -e 'git+https://github.com/okfn/ckan.git@ckan-2.1.1#egg=ckan'
+pip install -r /usr/lib/ckan/default/src/ckan/requirements.txt
 deactivate
 . /usr/lib/ckan/default/bin/activate
 
@@ -69,22 +76,32 @@ sudo service jetty restart
 cd /usr/lib/ckan/default/src/ckan
 paster db init -c /etc/ckan/default/development.ini
 
-# 7. Set up the DataStore
-# TODO
+#7. Set up the DataStore
+sed -ri 's/ckan.plugins =/ckan.plugins = datastore/g' /etc/ckan/default/development.ini
+
+# Create datastore user:
+sudo -u postgres createuser -S -D -R $ds_user_name
+sudo -u postgres psql -c"ALTER user $ds_user_name WITH PASSWORD '$ds_user_pass'"
+
+# Creates datastore db:
+sudo -u postgres createdb -O $ckan_user_name $ds_db_name --lc-ctype en_US.utf8  --lc-collate en_US.utf8 -E utf-8 -T template0
+
+# Edit URLs in CKAN config file
+sed -ri 's|#ckan.datastore.write_url = postgresql://ckan_default:root@localhost/datastore_default|ckan.datastore.write_url = postgresql://'$ckan_user_name':'$ckan_user_pass'@localhost/'$ds_db_name'|g' /etc/ckan/default/development.ini
+
+sed -ri 's|#ckan.datastore.read_url = postgresql://datastore_default:pass@localhost/datastore_default|ckan.datastore.read_url = postgresql://'$ds_user_name':'$ds_user_pass'@localhost/'$ds_db_name'|g' /etc/ckan/default/development.ini
+
+#Set permissions
+cd /usr/lib/ckan/default/src/ckan
+paster datastore set-permissions postgres -c /etc/ckan/default/development.ini
 
 # Link to who.ini:
 ln -s /usr/lib/ckan/default/src/ckan/who.ini /etc/ckan/default/who.ini
 
 # Deploy CKAN using Apache and modwsgi
+
 # Create a production.ini File
 cp /etc/ckan/default/development.ini /etc/ckan/default/production.ini
-
-# Install Apache and modwsgi
-apt-get install -y apache2 libapache2-mod-wsgi
-
-# Move Apache to /vagrant directory
-rm -rf /var/www
-ln -fs /vagrant /var/www
 
 # Create the WSGI Script File
 cp /vagrant/scripts/apache.wsgi /etc/ckan/default/apache.wsgi
@@ -101,6 +118,8 @@ sudo a2dissite default
 
 # Reload apache
 sudo service apache2 reload
+
+
 
 
 

@@ -59,11 +59,11 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   #
   # View the documentation for the provider you're using for more
   # information on available options.
-  
+
   # Shell provisioning
   config.vm.provision :shell, :path => "scripts/ckan.sh"
-  config.vm.provision :shell, :path => "scripts/drupal.sh"
-  config.vm.provision :shell, :path => "scripts/virtuoso.sh"  
+  #config.vm.provision :shell, :path => "scripts/drupal.sh"
+  #config.vm.provision :shell, :path => "scripts/virtuoso.sh"
 
   # Enable provisioning with Puppet stand alone.  Puppet manifests
   # are contained in a directory path relative to this Vagrantfile.
