@@ -5,6 +5,11 @@ mysql_root_pass=root
 app_pass=root
 dba_pass=root
 # ------------------------------------ #
+if [ -f "/vagrant/delete-this-to-reconfigure" ]; then
+exit 0
+fi
+
+touch /vagrant/delete-this-to-reconfigure
 
 # Install required packages:
 apt-get update
@@ -50,3 +55,16 @@ sudo debconf-set-selections <<< 'virtuoso-opensource-6.1 virtuoso-opensource-6.1
 sudo debconf-set-selections <<< 'virtuoso-opensource-6.1 virtuoso-opensource-6.1/dba-password password '$dba_pass''
 sudo debconf-set-selections <<< 'virtuoso-opensource-6.1 virtuoso-opensource-6.1/dba-password-again password '$dba_pass''
 apt-get install -y virtuoso-opensource
+
+# Stablish read permisions
+sudo chmod -R 755 /var/www
+
+# Create the Apache Config File
+cp /vagrant/scripts/vhost /etc/apache2/sites-available/default_vhost
+
+# Enable the ckan_site
+sudo a2ensite default_vhost
+sudo a2dissite default
+
+# Reload apache
+sudo service apache2 reload

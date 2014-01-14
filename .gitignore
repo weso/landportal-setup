@@ -6,5 +6,4 @@ landportal/
 # Exclude files
 *~
 phpmyadmin
-ckan_configured
-drupal_configured
+delete-this-to-reconfigure
