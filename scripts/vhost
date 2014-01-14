@@ -1,0 +1,30 @@
+<VirtualHost *:80>
+
+        ServerName test.ckan.org
+        ServerAlias test.ckan.org localhost
+        ServerAdmin webmaster@localhost
+
+        #Drupal instance
+        DocumentRoot /var/www/
+        DirectoryIndex index.phtml index.html index.php index.htm
+
+        # CKAN lives under /data
+        WSGIScriptAlias /data /etc/ckan/default/apache.wsgi
+        WSGIDaemonProcess test.ckan.org display-name=test.ckan.org processes=2 threads=10
+        WSGIProcessGroup test.ckan.org
+
+        # Pass authorization info on (needed for rest api)
+        WSGIPassAuthorization On
+
+        # Drupal has all requests apart form /data
+        <Directory /var/www/landportal>
+        Options Indexes FollowSymLinks MultiViews
+        AllowOverride All
+        Order allow,deny
+        allow from all
+        </Directory>
+
+        ErrorLog /var/log/apache2/test.ckan.error.log
+        CustomLog /var/log/apache2/test.ckan.custom.log combined
+
+</VirtualHost>
