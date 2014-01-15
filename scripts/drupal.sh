@@ -6,13 +6,11 @@ app_pass=root
 drupal_db=drupal
 drupal_user_name=druser
 drupal_user_pass=root
-drupal_folder_name=landportal
+drupal_folder_name=portal
 drupal_site_name=The-Land-Portal
 drupal_account_name=admin
 drupal_account_pass=admin
 # ------------------------------------ #
-
-function db_setup() {
     # Create Drupal db
     mysql -h localhost -u root -p$mysql_root_pass -e "create database if not exists $drupal_db"
 
@@ -21,13 +19,6 @@ function db_setup() {
 
     # Refresh MySQL
     mysql -h localhost -u root -p$mysql_root_pass $drupal_db -e "flush privileges"
-}
-
-if [ -d "/vagrant/$drupal_folder_name" ];
-then
-    db_setup
-else
-    db_setup
 
     # Navigate to www folder
     cd /var/www
@@ -44,8 +35,6 @@ else
 
     # Enable www-data group to write in sites/default/files
     sudo chmod -R 775 sites/default/files
-fi
-
 
 
 
