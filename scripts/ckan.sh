@@ -98,18 +98,6 @@ cp /etc/ckan/default/development.ini /etc/ckan/default/production.ini
 # Create the WSGI Script File
 cp /vagrant/scripts/apache.wsgi /etc/ckan/default/apache.wsgi
 
-# Stablish read permisions
-sudo chmod -R 755 /var/www
-
-# Create the Apache Config File
-cp /vagrant/scripts/vhost /etc/apache2/sites-available/default_vhost
-
-# Enable the ckan_site
-sudo a2ensite default_vhost
-sudo a2dissite default
-
-# Reload apache
-sudo service apache2 reload
 
 
 
