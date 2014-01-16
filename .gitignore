@@ -1,7 +1,7 @@
 # Exclude folders
 .vagrant/
 ckan/
-landportal/
+portal/
 
 # Exclude files
 *~
