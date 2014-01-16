@@ -5,7 +5,7 @@
         ServerAdmin webmaster@localhost
 
         #Drupal instance
-        DocumentRoot /var/www/portal
+        DocumentRoot /var/www/public/portal
         DirectoryIndex index.phtml index.html index.php index.htm
 
         # CKAN lives under /data
