@@ -35,7 +35,6 @@ sudo debconf-set-selections <<< 'phpmyadmin phpmyadmin/mysql/admin-pass password
 sudo debconf-set-selections <<< 'phpmyadmin phpmyadmin/mysql/app-pass password '$mysql_root_pass''
 sudo debconf-set-selections <<< 'phpmyadmin phpmyadmin/reconfigure-webserver multiselect apache2'
 apt-get install -y phpmyadmin
-sudo ln -s /usr/share/phpmyadmin /var/www/
 
 # Install Drush
 apt-get install -y php-pear
