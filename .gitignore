@@ -1,9 +1,7 @@
 # Exclude folders
 .vagrant/
-ckan/
-portal/
+public/
 
 # Exclude files
 *~
-phpmyadmin
 delete-this-to-reconfigure

@@ -17,7 +17,7 @@
         WSGIPassAuthorization On
 
         # Drupal has all requests apart form /data
-        <Directory /var/www/portal>
+        <Directory /var/www/public/portal>
         Options Indexes FollowSymLinks MultiViews
         AllowOverride All
         Order allow,deny
