@@ -62,10 +62,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   # Shell provisioning
   config.vm.provision :shell, :path => "scripts/base.sh"
-  #config.vm.provision :shell, :path => "scripts/ckan.sh"
-  config.vm.provision :shell, :path => "scripts/drupal.sh"
 
-  # Enable provisioning with Puppet stand alone.  Puppet manifests
+    # Enable provisioning with Puppet stand alone.  Puppet manifests
   # are contained in a directory path relative to this Vagrantfile.
   # You will need to create the manifests directory and a manifest in
   # the file base.pp in the manifests_path directory.

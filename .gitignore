@@ -1,6 +1,6 @@
 # Exclude folders
 .vagrant/
-public/
+portal/
 
 # Exclude files
 *~
