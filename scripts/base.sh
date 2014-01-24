@@ -20,7 +20,7 @@ sudo rm -rf /var/www
 sudo ln -fs /vagrant /var/www
 
 # Install PHP
-sudo apt-get install -y php5 libapache2-mod-php5 php5-cli php5-mysql
+sudo apt-get install -y php5 libapache2-mod-php5 php5-cli php5-mysql php5-curl
 sudo service apache2 restart
 
 # Install MySQL
