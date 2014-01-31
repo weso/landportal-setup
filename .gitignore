@@ -1,9 +1,10 @@
 # Exclude folders
 .vagrant/
 portal/
-
+ckan/
 # Exclude files
 *~
 delete-this-to-reconfigure
 *.sublime-workspace
 *.sublime-project
+ckan_configured
