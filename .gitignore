@@ -5,3 +5,5 @@ portal/
 # Exclude files
 *~
 delete-this-to-reconfigure
+*.sublime-workspace
+*.sublime-project
