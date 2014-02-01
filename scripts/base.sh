@@ -81,21 +81,14 @@ sudo service apache2 reload
 # Create drupal db if not exists
 mysql -h localhost -u root -p$mysql_root_pass -e "create database if not exists $drupal_db"
 
-# Create landportal db if not exists
-mysql -h localhost -u root -p$mysql_root_pass -e "create database if not exists $landportal_db"
-
 # Create landportal db schema
 mysql -h localhost -u root -p$mysql_root_pass < /vagrant/scripts/db-schema.sql
 
 # Grant all privileges to drupal db user
 mysql -h localhost -u root -p$mysql_root_pass $drupal_db -e "grant all privileges on $drupal_db.* to $drupal_user_name@localhost identified by '$drupal_user_pass' with grant option"
 
-# Grant all privileges to landportal db user
-mysql -h localhost -u root -p$mysql_root_pass $drupal_db -e "grant all privileges on $landportal_db.* to $landportal_user_name@localhost identified by '$landportal_user_pass' with grant option"
-
 # Refresh MySQL
 mysql -h localhost -u root -p$mysql_root_pass $drupal_db -e "flush privileges"
-mysql -h localhost -u root -p$mysql_root_pass $landportal_db -e "flush privileges"
 
 # Install Drupal
     cd /var/www/
