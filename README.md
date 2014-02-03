@@ -15,7 +15,7 @@ mysql_root_pass=root
 app_pass=root
 dba_pass=root
 ```
-4.- In command promt run: <br/>
+4.- In command promt run (in Windows use a command prompt with administrator privileges): <br/>
 
 ```
 vagrant up
