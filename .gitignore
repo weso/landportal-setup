@@ -2,6 +2,7 @@
 .vagrant/
 portal/
 ckan/
+landportal-ckanext-drupal/
 # Exclude files
 *~
 delete-this-to-reconfigure
