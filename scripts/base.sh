@@ -47,12 +47,7 @@ sudo debconf-set-selections <<< 'phpmyadmin phpmyadmin/reconfigure-webserver mul
 apt-get install -y phpmyadmin
 
 # Install Drush
-apt-get install -y php-pear
-sudo pear channel-discover pear.drush.org
-sudo pear install drush/drush
-wget http://download.pear.php.net/package/Console_Table-1.1.3.tgz
-sudo tar zxvf Console_Table-1.1.3.tgz -C /usr/share/php/drush/lib
-sudo pear upgrade drush/drush
+apt-get install -y drush
 
 # Install server requirements for Drupal
 apt-get install -y php5-gd
