@@ -96,3 +96,12 @@ mysql -h localhost -u root -p$mysql_root_pass $drupal_db -e "flush privileges"
 
     # Enable www-data group to write in sites/default/files
     sudo chmod -R 775 sites/default/files
+
+# Install Landportal-Drupal customizations
+    cd /var/www
+    git clone https://github.com/weso/landportal-drupal.git
+    # Link the Landportal-Drupal modules to the Drupal folder
+    rm -rf /var/www/$drupal_dir/sites/all
+    ln -s /var/www/landportal-drupal/sites/all /var/www/$drupal_dir/sites/all
+    cd /var/www/$drupal_dir
+    /var/www/landportal-drupal/drupal_config.sh
