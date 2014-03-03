@@ -3,6 +3,7 @@
 portal/
 ckan/
 landportal-ckanext-drupal/
+landportal-drupal/
 # Exclude files
 *~
 delete-this-to-reconfigure
