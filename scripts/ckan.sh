@@ -28,7 +28,7 @@ sudo mkdir -p /usr/lib/ckan/default
 sudo chown `whoami` /usr/lib/ckan/default
 virtualenv /usr/lib/ckan/default
 . /usr/lib/ckan/default/bin/activate
-pip install -e 'git+https://github.com/okfn/ckan.git@ckan-2.1.1#egg=ckan'
+pip install -e 'git+https://github.com/ckan/ckan.git#egg=ckan'
 pip install -r /usr/lib/ckan/default/src/ckan/requirements.txt
 deactivate
 . /usr/lib/ckan/default/bin/activate
