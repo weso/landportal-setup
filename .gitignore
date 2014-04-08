@@ -4,9 +4,11 @@ portal/
 ckan/
 landportal-ckanext-drupal/
 landportal-drupal/
+virtualenvs/
 # Exclude files
 *~
 delete-this-to-reconfigure
 *.sublime-workspace
 *.sublime-project
 ckan_configured
+receiver_configured
