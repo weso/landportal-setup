@@ -64,7 +64,7 @@ apt-get install -y virtuoso-opensource
 sudo chmod -R 755 /var/www
 
 # Create the Apache Config File
-cp /vagrant/scripts/vhost /etc/apache2/sites-available/default_vhost
+sudo ln -s /vagrant/scripts/vhost /etc/apache2/sites-available/default_vhost
 
 # Enable the ckan_site
 sudo a2ensite default_vhost
