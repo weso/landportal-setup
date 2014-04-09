@@ -10,6 +10,7 @@
 
         # CKAN lives under /data
         WSGIScriptAlias /data /etc/ckan/default/apache.wsgi
+	WSGIScriptAlias /receiver /vagrant/scripts/receiver.wsgi
         WSGIDaemonProcess test.ckan.org display-name=test.ckan.org processes=2 threads=10
         WSGIProcessGroup test.ckan.org
 
