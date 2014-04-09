@@ -73,11 +73,9 @@ sudo a2dissite default
 # Reload apache
 sudo service apache2 reload
 
-# Create drupal db if not exists
+# Create drupal db and landportal db if not exist
 mysql -h localhost -u root -p$mysql_root_pass -e "create database if not exists $drupal_db"
-
-# Create landportal db schema
-mysql -h localhost -u root -p$mysql_root_pass < /vagrant/scripts/db-schema.sql
+mysql -h localhost -u root -p$mysql_root_pass -e "create database if not exists $landportal_db"
 
 # Grant all privileges to drupal db user
 mysql -h localhost -u root -p$mysql_root_pass $drupal_db -e "grant all privileges on $drupal_db.* to $drupal_user_name@localhost identified by '$drupal_user_pass' with grant option"

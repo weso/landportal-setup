@@ -4,7 +4,10 @@ portal/
 ckan/
 landportal-ckanext-drupal/
 landportal-drupal/
+landportal-receiver/
+landportal-data-access-api/
 virtualenvs/
+
 # Exclude files
 *~
 delete-this-to-reconfigure
