@@ -68,6 +68,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.provision :shell, :path => "scripts/base.sh"
   config.vm.provision :shell, :path => "scripts/ckan.sh"
   config.vm.provision :shell, :path => "scripts/receiver.sh"
+  config.vm.provision :shell, :path => "scripts/api.sh"
 
     # Enable provisioning with Puppet stand alone.  Puppet manifests
   # are contained in a directory path relative to this Vagrantfile.
