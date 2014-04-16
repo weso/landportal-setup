@@ -75,7 +75,7 @@ sudo service apache2 reload
 
 # Create drupal db and landportal db if not exist
 mysql -h localhost -u root -p$mysql_root_pass -e "create database if not exists $drupal_db"
-mysql -h localhost -u root -p$mysql_root_pass -e "create database if not exists $landportal_db"
+mysql -h localhost -u root -p$mysql_root_pass -e "CREATE DATABASE $landportal_db DEFAULT CHARACTER SET utf8 DEFAULT COLLATE utf8_general_ci;"
 
 # Grant all privileges to drupal db user
 mysql -h localhost -u root -p$mysql_root_pass $drupal_db -e "grant all privileges on $drupal_db.* to $drupal_user_name@localhost identified by '$drupal_user_pass' with grant option"
