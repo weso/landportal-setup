@@ -16,3 +16,4 @@ delete-this-to-reconfigure
 ckan_configured
 receiver_configured
 api_configured
+solr_configured
