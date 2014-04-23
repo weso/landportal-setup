@@ -23,7 +23,7 @@ touch /vagrant/delete-this-to-reconfigure
 
 # Install required packages:
 apt-get update
-apt-get install -y python-dev postgresql libpq-dev python-pip python-virtualenv git-core solr-jetty openjdk-6-jdk apache2 libapache2-mod-wsgi
+apt-get install -y python-dev postgresql libpq-dev python-pip python-virtualenv git-core solr-jetty openjdk-6-jdk apache2 libapache2-mod-wsgi curl
 
 # Move Apache to /vagrant directory
 sudo rm -rf /var/www
