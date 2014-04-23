@@ -1,0 +1,10 @@
+<solr persistent="true" sharedLib="lib">
+    <cores adminPath="/admin/cores">
+        <core name="ckan" instanceDir="ckan">
+            <property name="dataDir" value="/var/lib/solr/data/ckan" />
+        </core>
+        <core name="drupal" instanceDir="drupal">
+            <property name="dataDir" value="/var/lib/solr/data/drupal" />
+        </core>
+    </cores>
+</solr>
