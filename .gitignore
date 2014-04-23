@@ -2,6 +2,7 @@
 .vagrant/
 portal/
 ckan/
+!solr/ckan
 landportal-ckanext-drupal/
 landportal-drupal/
 landportal-receiver/
