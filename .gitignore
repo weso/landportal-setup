@@ -2,6 +2,7 @@
 .vagrant/
 portal/
 ckan/
+!solr/ckan
 landportal-ckanext-drupal/
 landportal-drupal/
 landportal-receiver/
@@ -16,3 +17,4 @@ delete-this-to-reconfigure
 ckan_configured
 receiver_configured
 api_configured
+solr_configured

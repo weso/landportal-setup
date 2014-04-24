@@ -67,6 +67,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # Shell provisioning
   config.vm.provision :shell, :path => "scripts/base.sh"
   config.vm.provision :shell, :path => "scripts/ckan.sh"
+  config.vm.provision :shell, :path => "scripts/solr.sh"
   config.vm.provision :shell, :path => "scripts/receiver.sh"
   config.vm.provision :shell, :path => "scripts/api.sh"
 
