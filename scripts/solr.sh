@@ -4,6 +4,8 @@ if [ -f "/vagrant/solr_configured" ]; then
 fi
     echo 'Solr already configured!. Delete this to reconfigure Solr stack.' > /vagrant/solr_configured
 
+sed -ri 's/:space:/[:space:]/g' /etc/init.d/jetty
+
 # Setup Jetty. Jetty is the app container under which Solr runs.
 sed -i 's|NO_START=1|NO_START=0|g' /etc/default/jetty
 sed -i 's|#JETTY_HOST=$(uname -n)|JETTY_HOST=0.0.0.0|g' /etc/default/jetty
