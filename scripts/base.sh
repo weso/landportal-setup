@@ -95,6 +95,10 @@ mysql -h localhost -u root -p$mysql_root_pass $drupal_db -e "flush privileges"
     # Enable www-data group to write in sites/default/files
     sudo chmod -R 775 sites/default/files
 
+# Allow Drupal to access the Lanbook database
+sudo rm -f /vagrant/portal/sites/default/settings.php
+sudo ln -s /vagrant/settings.php /vagrant/portal/sites/default
+
 # Install Landportal-Drupal customizations
     cd /var/www
     git clone https://github.com/weso/landportal-drupal.git
