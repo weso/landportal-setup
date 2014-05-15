@@ -92,6 +92,13 @@ ln -s /usr/lib/ckan/default/src/ckan/who.ini /etc/ckan/default/who.ini
 
 # Deploy CKAN using Apache and modwsgi
 
+#Setup file uploads
+sudo mkdir -p /var/lib/ckan/default
+sed -i '/[app:main]/aNew ckan.storage_path = /var/lib/ckan/default' /etc/ckan/default/development.ini
+sudo chown www-data /var/lib/ckan/default
+sudo chmod u+rwx /var/lib/ckan/default
+sudo service apache2 reload
+
 # Create a production.ini File
 cp /etc/ckan/default/development.ini /etc/ckan/default/production.ini
 
