@@ -64,6 +64,9 @@ sed -i 's/ckan_default:pass/'$ckan_user_name':'$ckan_user_pass'/g' /etc/ckan/def
 #sudo ln -s /usr/lib/ckan/default/src/ckan/ckan/config/solr/schema-2.0.xml /etc/solr/conf/schema.xml
 #sudo service jetty restart
 
+sed -ri 's|#solr_url = http://127.0.0.1:8983/solr|solr_url = http://127.0.0.1:8983/solr/ckan|g' /etc/ckan/default/development.ini
+
+
 # Create database tables:
 cd /usr/lib/ckan/default/src/ckan
 paster db init -c /etc/ckan/default/development.ini
