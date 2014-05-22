@@ -23,11 +23,12 @@ sudo -u jetty mkdir /var/lib/solr/data/drupal
 
 # Setup CKAN core configuration files.
 sudo mkdir /usr/share/solr/ckan
-sudo ln -s /vagrant/solr/ckan/conf/ /usr/share/solr/ckan/conf
+sudo cp /vagrant/solr/ckan/conf/ /usr/share/solr/ckan/conf
+sudo ln -s /usr/lib/ckan/default/src/ckan/ckan/config/solr/schema-2.0.xml /etc/solr/conf/schema.xml
 
 # Setup Drupal core configuration files.
 sudo mkdir /usr/share/solr/drupal
-sudo ln -s /vagrant/solr/drupal/conf/ /usr/share/solr/drupal/conf
+sudo cp /vagrant/solr/drupal/conf/ /usr/share/solr/drupal/conf
 
 # Restart Jetty to load the changes
 sudo service jetty restart

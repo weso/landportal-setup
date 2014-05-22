@@ -49,6 +49,7 @@ sudo -u postgres createdb -O $ckan_user_name $ckan_db_name --lc-ctype en_US.utf8
 sudo mkdir -p /etc/ckan/default
 sudo chown -R `whoami` /etc/ckan/
 cd /usr/lib/ckan/default/src/ckan
+. /usr/lib/ckan/default/bin/activate
 paster make-config ckan /etc/ckan/default/development.ini
 
 # Edit the development.ini file changing the following options:'
@@ -97,7 +98,7 @@ ln -s /usr/lib/ckan/default/src/ckan/who.ini /etc/ckan/default/who.ini
 
 #Setup file uploads
 sudo mkdir -p /var/lib/ckan/default
-sed -i '/[app:main]/aNew ckan.storage_path = /var/lib/ckan/default' /etc/ckan/default/development.ini
+#sed -i '/[app:main]/aNew ckan.storage_path = /var/lib/ckan/default' /etc/ckan/default/development.ini
 sudo chown www-data /var/lib/ckan/default
 sudo chmod u+rwx /var/lib/ckan/default
 sudo service apache2 reload
@@ -107,15 +108,3 @@ cp /etc/ckan/default/development.ini /etc/ckan/default/production.ini
 
 # Create the WSGI Script File
 cp /vagrant/scripts/apache.wsgi /etc/ckan/default/apache.wsgi
-
-
-
-
-
-
-
-
-
-
-
-
