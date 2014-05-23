@@ -53,6 +53,7 @@ paster make-config ckan /etc/ckan/default/development.ini
 
 # Edit the development.ini file changing the following options:'
 sed -i 's/ckan_default:pass/'$ckan_user_name':'$ckan_user_pass'/g' /etc/ckan/default/development.ini
+sed -ri 's|#solr_url = http://127.0.0.1:8983/solr|solr_url = http://127.0.0.1:8983/solr/ckan|g' /etc/ckan/default/development.ini
 
 # Setup Solr (Single Solr instance):
 #sed -i 's|NO_START=1|NO_START=0|g' /etc/default/jetty
@@ -92,27 +93,8 @@ ln -s /usr/lib/ckan/default/src/ckan/who.ini /etc/ckan/default/who.ini
 
 # Deploy CKAN using Apache and modwsgi
 
-#Setup file uploads
-sudo mkdir -p /var/lib/ckan/default
-sed -i '/[app:main]/aNew ckan.storage_path = /var/lib/ckan/default' /etc/ckan/default/development.ini
-sudo chown www-data /var/lib/ckan/default
-sudo chmod u+rwx /var/lib/ckan/default
-sudo service apache2 reload
-
 # Create a production.ini File
 cp /etc/ckan/default/development.ini /etc/ckan/default/production.ini
 
 # Create the WSGI Script File
 cp /vagrant/scripts/apache.wsgi /etc/ckan/default/apache.wsgi
-
-
-
-
-
-
-
-
-
-
-
-
